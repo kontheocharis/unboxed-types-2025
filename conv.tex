@@ -1,0 +1,218 @@
+\[
+\newcommand{\syn}{\textsf}
+\newcommand{\Ty}{\syn{Ty}}
+\newcommand{\Tm}{\syn{Tm}}
+\newcommand{\Con}{\syn{Con}}
+\newcommand{\Tms}{\syn{Tms}}
+\newcommand{\Tel}{\syn{Tel}}
+\newcommand{\Sub}{\syn{Sub}}
+\newcommand{\El}{\syn{El}}
+\newcommand{\n}{\syn{n}}
+\newcommand{\code}{\syn{code}}
+\newcommand{\ap}{\syn{ap}}
+\newcommand{\univ}{\mathcal{U}}
+\newcommand{\ptr}{\syn{ptr}}
+\newcommand{\Bytes}{\syn{Bytes}}
+\newcommand{\meta}{\textbf}
+\newcommand{\remb}{\urcorner}
+\newcommand{\Set}{\meta{Set}}
+\]
+
+We formulate an MLTT-style type theory augmented to have unboxed
+semantics. To do this, we first assume access to a metatheoretic type of
+\(\Bytes\). This comes with a signature \[
+0 : \Bytes \qquad 1 : \Bytes \qquad + : \Bytes \to \Bytes \to \Bytes \qquad \ptr : \Bytes \,,
+\] where the \(0\) element should be neutral with respect to addition.
+The type of natural numbers is a perfectly valid definition for this
+type, but we abstract away from that for flexibility (perhaps we might
+want the extended natural numbers for example). The constant \(\ptr\)
+defines the size of a pointer. This will usually be 8 but might be
+different depending on the target architecture. Generally we want to
+make as few assumptions about the target as possible.
+
+First, our types will be indexed not just by contexts, but also by
+bytes: \[
+\Ty : \Con \to \Bytes \to \Set \,.
+\] In our type theory, we will not regard issues of universe sizing, as
+this is orthogonal to our goals. We have the following basic type
+formers: \[
+\begin{aligned}
+&\univ : \Ty\ \Gamma\ 0 \\
+&\univ_{\_} : (b : \Bytes) \to \Ty\ \Gamma\ 0 \\
+&\El : \Tm\ \Gamma\ \univ_b \to \Ty\ \Gamma\ b \\
+&\El_\square : \Tm\ \Gamma\ \univ \to \Ty\ \Gamma\ \ptr \\
+\end{aligned}
+\] The type \(\univ\) is the type of codes for types that are not
+necessarily sized, while the \(\univ_b\) type is the type of codes for
+types of size \(b\). The \(\El\) interpretation maps codes for types of
+size \(b\) to actual types of size \(b\), while the \(\El_\square\)
+interpretation maps codes for any type to actual types which \emph{box}
+their contents. In other words, internally, if \(A : \univ\), then
+\(\El_\square\ A\) can be used as a type and at runtime the data of
+\(A\) will be under a heap-allocated pointer indirection. On the other
+hand, if \(B : \univ_b\), then \(\El\ B\) can be used as a type and at
+runtime the data of \(B\) will be stored \emph{inline}, since it is
+known that \(B\) takes up exactly \(b\) bytes. Codes for types of any
+kind take up no space at runtime because there is no way to pattern
+match on them.
+
+On the term side, we have some formers for codes of types: \[
+\begin{aligned}
+\code : \Ty\ \Gamma\ b \to \Tm\ \Gamma\ \univ_b \\
+\langle\_\rangle : \Tm\ \Gamma\ \univ_b \to \Tm\ \Gamma\ \univ
+\end{aligned}
+\] First, for any type \(A\) of size \(b\) we have \(\code\ A\) for the
+code corresponding to \(A\), which itself is a term of type \(\univ_b\).
+Additionally, for any code \(t\) in \(\univ_b\), we can get a code
+\(\langle t \rangle\) in \(\univ\) by `forgetting' that we know the size
+of \(t\) is \(b\). The sized term formers satisfy the definitional
+equalities \[
+\code\ (\El\ t) = t \qquad \El\ (\code\ A) = A \,.
+\] Notice that we do not have a \(\code\) operator for types with
+unknown size. This is because all types have a known size (types are
+indexed by their size, after all!). With these formers, we can construct
+a `boxing' type constructor as \[
+\begin{aligned}
+&\square : \Ty\ \Gamma\ b \to \Ty\ \Gamma\ \ptr \\
+&\square\ A = \El_\square\ \langle \code\ A\rangle \,.
+\end{aligned}
+\] We can use this type constructor to box types of a \emph{known} size,
+for example to improve performance of copying. We can also define boxing
+and unboxing operations as \[
+\syn{box} : \Tm\ \Gamma\ A \simeq \Tm\ \Gamma\ (\square\ A) : \syn{unbox} \\
+\] related by a definitional isomorphism, as part of the syntax.
+
+\subsection{Contexts and
+substitutions}\label{contexts-and-substitutions}
+
+We now augment our syntax with dependent function and pair types.
+However, before we do that, we must be more explicit about contexts and
+substitutions. First, we define contexts as \[
+\Con : \Set \qquad \cdot : \Con \qquad
+\rhd\, : (\Gamma : \Con) \to \{b : \Bytes\} \to \Ty\ \Gamma\ b \to \Con
+\] Each member of a context has a well-defined size. As a result, we can
+define the obvious projection function \(|\_|\) that takes a context to
+its size (the sum of the sizes of its types). The fibres of this
+projection are contexts indexed by size \(b\), which we denote
+\(\Con\ b\).
+
+Substitutions are defined as usual; we do not really need to augment the
+standard definition. However, we must require that the action of
+substitutions on terms and types does not vary their sizes. In other
+words, \[
+\_[\_] : \Ty\ \Gamma\ b \to \Sub\ \Delta\ \Gamma \to \Ty\ \Delta\ b \qquad
+\_[\_] : \Tm\ \Gamma\ A \to (\sigma : \Sub\ \Delta\ \Gamma) \to \Tm\ \Delta\ A[\sigma] \,.
+\] We also require that the type formers in the previous section, and
+their attached sizes, are stable under substitutions.
+
+\subsection{Function types}\label{function-types}
+
+We define dependent function types with former \[
+\Pi : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ \ptr
+\] A function's size in memory is just a pointer; this pointer is a
+pointer to a heap allocation that stores the captures of the functions
+(under another pointer), and the code of the function itself. In this
+system, we do not reason about closures; we expect that the runtime
+handles that. One might be able to extend the type theory to reason
+about sizes of captures, but our attempts resulted in complicated
+theories. Nevertheless, we are able to model functions whose inputs and
+outputs are \emph{unboxed}, which has the standard stack semantics of a
+language like C. It is important that sizes are unaffected by
+substitution, because then under a global context
+\(\sigma : \Sub\ \cdot\ \Gamma\) we have that types in \(\Gamma\) of
+size \(b\) indeed have size \(b\) at evaluation time. The term formers
+for function types remain unchanged as usual: \[
+\lambda : \Tm\ (\Gamma \rhd A)\ B \simeq \Tm\ \Gamma\ (\Pi\ A\ B) : \ap \,.
+\]
+
+\subsection{Pair types}\label{pair-types}
+
+As opposed to function types, we are able to store pairs truly
+contiguously if both sides have a known size. In other words, the type
+former for pairs is \[
+\Sigma : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ (a + b)
+\] One might raise some objections about alignment in memory; surely
+sometimes we want to align the fields such that in an iterated
+\(\Sigma\) type all elements are equal distance away. However, since we
+are working with an abstract \(\Bytes\) type we are free to define
+addition as we please, and we do not require any properties other
+neutrality of 0---it need not even be commutative! Therefore, we can
+encode a sophisticated alignment algorithm as the addition \(+\)
+operation of \(\Bytes\).
+
+The introduction and elimination rules for pairs remain unchanged: \[
+(\_,\_) : (t : \Tm\ \Gamma\ A) \times \Tm\ \Gamma\ B[a]
+\simeq \Tm\ \Gamma\ (\Sigma\ A\ B) : \syn{pr}
+\]
+
+\subsection{Padding type and unit}\label{padding-type-and-unit}
+
+Sometimes we want to store some extra bytes to pad a smaller type in
+order to reach a desired size. For this reason we add an extra type
+former \[
+\syn{Pad} : (b : \Bytes) \to \Ty\ \Gamma\ b \qquad \syn{pad} : \Tm\ \Gamma\ (\syn{Pad}\ b) \qquad
+\syn{pad-$\eta$} : (t : \Tm\ \Gamma\ (\syn{Pad}\ b)) \to t = \syn{pad}
+\] which is a generalisation of the unit type that takes up \(b\) bytes
+in memory. We can then define \(\mathbb{1} := \syn{Pad}\ 0\) and
+\(\syn{tt} := \syn{pad}\).
+
+\subsection{Examples}\label{examples}
+
+We assume that definitions are able to abstract over finitely many byte
+values, which we write as a subscript like \(\syn{Maybe}_b\). In
+practice this is a straightforward extension of the syntax, similarly to
+simple (non-first-class) universe polymorphism, that we leave as an
+implementation detail. Each usage of a definition is instantiated to the
+correct byte values through constraint solving. Since bytes are not
+terms in the language but rather literals, we do not need to worry about
+abstracting over bytes or other complicated features that might lead to
+unknown type sizes at compile-time.
+
+\subsubsection{Maybe as a tagged union}\label{maybe-as-a-tagged-union}
+
+First, let's take a look at how to define the \(\syn{Maybe}\) type in
+such a way that its data is stored contiguously as a tagged union. This
+is similar to how languages such as Rust store it. \[
+\begin{aligned}
+&\syn{Maybe}_b : \Pi\ (T : \univ_b)\ \univ_{b + 1} \\
+&\syn{Maybe}_b = \lambda\ T.\
+\Sigma\ (x : \mathbb{2})\ (\syn{if}\ (x'.\ \univ_b)\ x\ T\ (\syn{Pad}\ b)) \\[1em]
+&\syn{nothing}_b : \syn{Maybe}_b\ T \\
+&\syn{nothing}_b = (\syn{false}, \syn{pad}) \\[1em]
+&\syn{just}_b : T \to \syn{Maybe}_b\ T \\
+&\syn{just}_b = \lambda\ t.\  (\syn{true}, t) \\[1em]
+&\syn{maybe}_b : \{T : \univ_b\} \to (E : \syn{Maybe}_b\ T \to  \univ_c) \\
+\quad & \to E\ \syn{nothing} \to ((t : T) \to E\ (\syn{just}\ t)) \\
+\quad & \to (m : \syn{Maybe}_b\ T) \to E\ m \\
+&\syn{maybe}_b = \lambda\ E\ n\ j\ m.\ \ldots
+\end{aligned}
+\] \#\#\# Byte buffers
+
+\subsection{First-class byte sizes with
+staging}\label{first-class-byte-sizes-with-staging}
+
+If we embed the type theory defined above in another system, to form a
+\emph{two-level} type theory, we can reason about byte values as part of
+the language itself.
+
+Consider another type theory whose types \(\syn{BTy}\) look like \[
+\mathbb{b} : \syn{BTy}\ \Gamma \qquad
+\Pi\mathbb{b} : (A : \syn{BTy}\ \Gamma) \to \syn{BTy}\ (\Gamma \rhd A) \to \syn{BTy}\ \Gamma
+\] and whose terms abstract over values of \(\mathbb{b}\) only. This is
+a simple second-order theory over an abstract type of bytes. The terms
+look like \[
+\_\urcorner : \syn{BTm}\ \Gamma\ \mathbb{b} \qquad
+\Pi\mathbb{b} : (A : \syn{BTy}\ \Gamma) \to \syn{BTy}\ (\Gamma \rhd A) \to \syn{BTy}\ \Gamma
+\]
+
+\subsection{Implementation notes}\label{implementation-notes}
+
+As usual we can omit codes and interpretations.
+
+\subsection{Extensions}\label{extensions}
+
+\begin{itemize}
+\tightlist
+\item
+  First class abstraction over bytes.
+\end{itemize}

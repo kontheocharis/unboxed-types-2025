@@ -1,0 +1,126 @@
+When the reduction rules of type theory become part of the static semantics, it
+is impossible to always compute the memory layout of a type during compilation.
+This happens when polymorphism is present but monomorphisation is not, and in
+particular when dependent types are part of the mix, since the dependency might
+be on runtime values.
+
+In this ongoing work, we formulate a dependent type theory where sizes of types
+are always known at compile-time, and thus compilation can target a language
+like C. Indirection is opt-in and can be avoided, leading to efficient code that
+enables cache locality. This is done by \emph{indexing} syntactic types by a
+metatheoretic type describing memory layouts: $\Bytes$. This leads to a notion
+of representation polymorphism. This has been explored before, but in the
+context of non-dependent functional languages, and often comes with a heuristic
+final pass which adds indirection to types whose size cannot be heuristically
+determined. Our approach requires no heuristics, and extends to full dependent
+types.
+
+The staging view of \emph{two-level type theory} (2LTT) \cite{Annenkov2023-vk}
+has been explored by Kov\'acs in the general setting \cite{Kovacs2022-rf} as
+well as in the setting of closure-free functional programming
+\cite{Kovacs2024-hn}. Inspired by a note in the afforementioned works, we embed
+our unboxed type theory as the object language of a 2LTT, which allows us to
+write type-safe metaprograms that compute representation-specific constructions.
+For example, we can formulate a universe of flat protocol specifications in the
+style of Allais \cite{Allais2023-zq}, and interpret it in the unboxed object
+theory. We needn't compromise on the usage of dependent types either; as opposed
+to \cite{Kovacs2024-hn}, our object theory is dependently typed and thus we can
+encode higher-order polymorphic functions as part of the final program, but
+without hiding data behind indirections.
+
+\paragraph{Basic setup}
+We formulate our system in an MLTT-style type theory, using the intrinsic QIIT
+style of Altenkirch and Kaposi \cite{Altenkirch2016-zc}.
+To do this, we first assume access to a metatheoretic type of
+\(\Bytes\) with a signature
+\[
+0 : \Bytes \qquad 1 : \Bytes \qquad + : \Bytes \to \Bytes \to \Bytes \qquad \ptr : \Bytes \,.
+\]
+The constant \(\ptr\) defines the size of a pointer. Any model of
+the signature above will suffice; such a model might encode a sophisticated
+layout algorithm for example.
+
+First, types are indexed not just by contexts, but also by
+bytes:\footnote{For brevity we will not regard issues of universe sizing, but this can
+be accomodated without issue.} $\Ty : \Con \to \Bytes \to \Set$.
+We have the following basic type and term formers:
+{\small%
+\[
+\begin{alignedat}{3}
+&\univ_{\_} : \Bytes \to \Ty\ \Gamma\ 0 \quad  &&\El : \Tm\ \Gamma\ \univ_b \simeq \Ty\ \Gamma\ b : \code \quad  &&\langle-\rangle : \Tm\ \Gamma\ \univ_b \to \Tm\ \Gamma\ \univ \\
+&\univ : \Ty\ \Gamma\ 0 \quad &&\El_\square : \Tm\ \Gamma\ \univ \to \Ty\ \Gamma\ \ptr\quad  && \syn{box} : \Tm\ \Gamma\ A \simeq \Tm\ \Gamma\ (\El_\square\ \langle\code\ A\rangle) : \syn{unbox} \\
+\end{alignedat}
+\]}
+
+The type \(\univ\) is the type of codes for types of an unknown size, while the
+\(\univ_b\) type is the type of codes for types of size \(b\). The \(\El\)
+interpretation maps codes for types of size \(b\) to actual types of size \(b\),
+while the \(\El_\square\) interpretation maps codes for any type to actual types
+which \emph{box} their contents. In other words, internally, if \(A : \univ\),
+then \(\El_\square\ A\) can be used as a type and at runtime the data of \(A\)
+will be under a heap-allocated pointer indirection. On the other hand, if \(B :
+\univ_b\), then \(\El\ B\) can be used as a type and at runtime the data of
+\(B\) will be stored \emph{inline}, since it is known that \(B\) takes up
+exactly \(b\) bytes. Codes for types of any kind take up no space at runtime
+because they are erased.
+Additionally, for any code \(t\) in \(\univ_b\), we can get a code
+\(\langle t \rangle\) in \(\univ\) by `forgetting' that we know the size
+of \(t\) is \(b\). Finally, we have boxing and unboxing operators for types of a known size.
+
+\paragraph{Contexts and
+substitutions}\label{contexts-and-substitutions}
+
+Contexts $\Gamma$ store the size of each type, such that $|\Gamma| : \Bytes$ is the sum
+of the sizes of its types: Extension is $\rhd\, : (\Gamma :
+\Con) \to \{b : \Bytes\} \to \Ty\ \Gamma\ b \to \Con$. Substitutions are defined
+as usual; we do not really need to augment the standard definition other than
+adding implicit arguments for bytes. However, we must ensure that the action of
+substitutions on types does not vary their sizes: $-[-] : \Ty\ \Gamma\ b \to
+\Sub\ \Delta\ \Gamma \to \Ty\ \Delta\ b$.
+
+\paragraph{$\Pi$ and $\Sigma$}\label{function-types}
+
+This setup can be augmented with $\Pi$ and $\Sigma$ types, where the dependency
+is \emph{uniform} with respect to layout:
+\[
+\Pi : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ \ptr \qquad
+\Sigma : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ (a + b)
+\]
+A function's size in memory is just a pointer to its closure allocation which should
+also contain the code pointer. For now we do not handle unboxed closure
+captures, but the inputs and outputs are unboxed. Conversely, pairs are stored
+inline; their size is the sum of the sizes of their components.
+
+\paragraph{Padding type and unit}\label{padding-type-and-unit}
+
+Sometimes we want to store some extra bytes to pad a smaller type in
+order to reach a desired size. For this reason we add an extra type
+former \[
+\syn{Pad} : (b : \Bytes) \to \Ty\ \Gamma\ b \qquad \syn{pad} : \Tm\ \Gamma\ (\syn{Pad}\ b) \qquad
+\syn{pad-$\eta$} : (t : \Tm\ \Gamma\ (\syn{Pad}\ b)) \to t = \syn{pad}
+\] which is a generalisation of the unit type that takes up \(b\) bytes
+in memory. We can then define \(\mathbb{1} := \syn{Pad}\ 0\) and
+\(\syn{tt} := \syn{pad}\).
+
+\paragraph{First-class layouts with staging}\label{layouts-staging}
+
+
+\subsection{Example: Maybe as a tagged union}\label{maybe-as-a-tagged-union}
+
+First, let's take a look at how to define the \(\syn{Maybe}\) type in
+such a way that its data is stored contiguously as a tagged union. This
+is similar to how languages such as Rust store it. \[
+\begin{aligned}
+&\syn{Maybe}_b : \Pi\ (T : \univ_b)\ \univ_{b + 1} \\
+&\syn{Maybe}_b = \lambda\ T.\
+\Sigma\ (x : \mathbb{2})\ (\syn{if}\ (x'.\ \univ_b)\ x\ T\ (\syn{Pad}\ b)) \\[1em]
+&\syn{nothing}_b : \syn{Maybe}_b\ T \\
+&\syn{nothing}_b = (\syn{false}, \syn{pad}) \\[1em]
+&\syn{just}_b : T \to \syn{Maybe}_b\ T \\
+&\syn{just}_b = \lambda\ t.\  (\syn{true}, t) \\[1em]
+&\syn{maybe}_b : \{T : \univ_b\} \to (E : \syn{Maybe}_b\ T \to  \univ_c) \\
+\quad & \to E\ \syn{nothing} \to ((t : T) \to E\ (\syn{just}\ t)) \\
+\quad & \to (m : \syn{Maybe}_b\ T) \to E\ m \\
+&\syn{maybe}_b = \lambda\ E\ n\ j\ m.\ \ldots
+\end{aligned}
+\]
