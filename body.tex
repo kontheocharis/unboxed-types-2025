@@ -29,10 +29,10 @@ encode higher-order polymorphic functions as part of the final program, but
 without hiding data behind indirections.
 
 \paragraph{Basic setup}
-We formulate our system in an MLTT-style type theory, using the intrinsic QIIT
-style of Altenkirch and Kaposi \cite{Altenkirch2016-zc}.
-To do this, we first assume access to a metatheoretic type of
-\(\Bytes\) with a signature
+We formulate our system as an MLTT-style type theory, using the intrinsic QIIT
+syntax of Altenkirch and Kaposi \cite{Altenkirch2016-zc}.
+We assume access to a metatheoretic type of
+\(\Bytes\) with
 \[
 0 : \Bytes \qquad 1 : \Bytes \qquad + : \Bytes \to \Bytes \to \Bytes \qquad \ptr : \Bytes \,.
 \]

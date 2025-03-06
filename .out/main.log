@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.29)  6 MAR 2025 19:54
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.29)  6 MAR 2025 20:06
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -665,11 +665,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 LaTeX Font Info:    Trying to load font information for U+bbold on input line 1
 02.
 
-(/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [2])
-(.out/main.bbl) 
+(/usr/local/texlive/2021/texmf-dist/tex/latex/bbold/Ubbold.fd)) (.out/main.bbl
+[2]) 
 AED: lastpage setting LastPage
 [3] (.out/main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
@@ -682,7 +679,7 @@ Here is how much of TeX's memory you used:
  30205 multiletter control sequences out of 15000+600000
  417129 words of font info for 84 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 115i,12n,119p,340b,343s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 115i,11n,119p,340b,502s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pf
 b></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
 ></usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb>
@@ -707,7 +704,7 @@ t/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2021/texmf-dist/
 fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2021/texmf-dist/fo
 nts/type1/public/amsfonts/latxfont/lasy10.pfb></usr/local/texlive/2021/texmf-di
 st/fonts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on .out/main.pdf (3 pages, 252688 bytes).
+Output written on .out/main.pdf (3 pages, 252468 bytes).
 PDF statistics:
  145 PDF objects out of 1000 (max. 8388607)
  114 compressed objects within 2 object streams
