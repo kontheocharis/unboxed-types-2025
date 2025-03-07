@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.29)  7 MAR 2025 18:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.29)  7 MAR 2025 18:39
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -673,11 +673,11 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 12961 strings out of 478994
- 188489 string characters out of 5858183
- 524651 words of memory out of 5000000
- 30206 multiletter control sequences out of 15000+600000
- 417489 words of font info for 86 fonts, out of 8000000 for 9000
+ 12965 strings out of 478994
+ 188537 string characters out of 5858183
+ 524684 words of memory out of 5000000
+ 30208 multiletter control sequences out of 15000+600000
+ 417673 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  115i,15n,119p,340b,503s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2021/texmf-dist/fonts/type1/public/bbold-type1/bbold10.pf
@@ -707,10 +707,10 @@ ts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2021/texmf-dist/fonts
 /type1/public/amsfonts/cm/cmtt9.pfb></usr/local/texlive/2021/texmf-dist/fonts/t
 ype1/public/amsfonts/latxfont/lasy10.pfb></usr/local/texlive/2021/texmf-dist/fo
 nts/type1/public/amsfonts/symbols/msam7.pfb>
-Output written on .out/main.pdf (3 pages, 271397 bytes).
+Output written on .out/main.pdf (3 pages, 273258 bytes).
 PDF statistics:
- 161 PDF objects out of 1000 (max. 8388607)
- 127 compressed objects within 2 object streams
- 20 named destinations out of 1000 (max. 500000)
+ 164 PDF objects out of 1000 (max. 8388607)
+ 130 compressed objects within 2 object streams
+ 21 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

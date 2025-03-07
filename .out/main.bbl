@@ -1,5 +1,10 @@
 \begin{thebibliography}{1}
 
+\bibitem{rust-option}
+std::option - {Rust}.
+\newblock \url{https://doc.rust-lang.org/std/option/}.
+\newblock Accessed: 2025-3-7.
+
 \bibitem{Allais2023-zq}
 Guillaume Allais.
 \newblock Seamless, correct, and generic programming over serialised data.

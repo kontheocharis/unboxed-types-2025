@@ -809,6 +809,7 @@ INPUT .out/main.bbl
 INPUT .out/main.bbl
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold9.tfm
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmti9.tfm
 INPUT .out/main.aux
 INPUT .out/main.out

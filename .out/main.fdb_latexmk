@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex .out/main"] 1741371346 ".out/main.aux" ".out/main.bbl" ".out/main" 1741371484
-  ".out/main.aux" 1741371484 2095 1a65cb35b25f2288b0a8a331155bb3c5 "pdflatex"
+["bibtex .out/main"] 1741372777 ".out/main.aux" ".out/main.bbl" ".out/main" 1741372777
+  ".out/main.aux" 1741372777 2143 23f92a40284d31e3eab50bd1467000e1 "pdflatex"
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "bib.bib" 1741370436 3869 fed5ae69a49cbe416ef3c9a52a5bbb15 ""
+  "bib.bib" 1741372777 4096 77e56a108b571fce19565cd15d8a3f87 ""
   (generated)
-  ".out/main.blg"
   ".out/main.bbl"
-["pdflatex"] 1741371483 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741371484
-  ".out/main.aux" 1741371484 2095 1a65cb35b25f2288b0a8a331155bb3c5 "pdflatex"
-  ".out/main.bbl" 1741371346 1532 a7f9db8bf3113a0ac36e6581cefa4930 "bibtex .out/main"
-  ".out/main.out" 1741371484 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  ".out/main.blg"
+["pdflatex"] 1741372777 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741372777
+  ".out/main.aux" 1741372777 2143 23f92a40284d31e3eab50bd1467000e1 "pdflatex"
+  ".out/main.bbl" 1741372777 1662 7f401c930787eecc66899846761f179c "bibtex .out/main"
+  ".out/main.out" 1741372777 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -26,6 +26,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold6.tfm" 1266369035 764 bc340104b2499eb440977e2d302aad8b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold7.tfm" 1266369035 788 cfc6f7349e03ca366560917be88c2027 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold8.tfm" 1266369035 768 b3927d32cc38bf306f676b7e9ddf7414 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/bbold/bbold9.tfm" 1266369035 768 728e575cd98bc8b78b5579f7cba845be ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmbx5.tfm" 1136768653 1332 f817c21a1ba54560425663374f1b651a ""
@@ -160,12 +161,12 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "body.tex" 1741371483 8316 cfd442289d6c9f5487644f1e308e9ab3 ""
+  "body.tex" 1741372764 8336 1f68f38369f479dc4e7fb0bc5ccc8f0b ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "preamble.tex" 1741288156 582 24f7b45c4fcb4432c8e36083ab22080d ""
   (generated)
-  ".out/main.out"
   ".out/main.pdf"
   ".out/main.aux"
+  ".out/main.out"
   ".out/main.log"

@@ -117,7 +117,7 @@ the object fragment. If the final program is of the form $p :
 
 Let's take a look at how to define the \(\syn{Maybe}\) type in
 such a way that its data is stored contiguously as a tagged union without indirections.\footnote{This
-is similar to the approach of languages such as Rust}.
+is similar to the approach of languages such as Rust \cite{rust-option}.}.
 We assume access to a type $\syn{Pad}\ b : \Ty\ \Gamma\ b$ which is the unit type that takes up $b$ bytes, with sole constructor $\syn{pad}$ akin to $\syn{tt}$.
 \[
 \begin{aligned}
