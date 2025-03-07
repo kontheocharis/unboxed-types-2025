@@ -115,20 +115,28 @@ the object fragment. If the final program is of the form $p :
 
 \paragraph{Example: Maybe as a tagged union}\label{maybe-as-a-tagged-union}
 
-First, let's take a look at how to define the \(\syn{Maybe}\) type in
-such a way that its data is stored contiguously as a tagged union. This
-is similar to how languages such as Rust store it. \[
+Let's take a look at how to define the \(\syn{Maybe}\) type in
+such a way that its data is stored contiguously as a tagged union without indirections.\footnote{This
+is similar to the approach of languages such as Rust}.
+We assume access to a type $\syn{Pad}\ b : \Ty\ \Gamma\ b$ which is the unit type that takes up $b$ bytes, with sole constructor $\syn{pad}$ akin to $\syn{tt}$.
+\[
 \begin{aligned}
 &\syn{Maybe}_b : \Pi\ (T : \univ_b)\ \univ_{b + 1} \\
-&\syn{Maybe}_b = \lambda\ T.\
-\Sigma\ (x : \mathbb{2})\ (\syn{if}\ (x'.\ \univ_b)\ x\ T\ (\syn{Pad}\ b)) \\[1em]
-&\syn{nothing}_b : \syn{Maybe}_b\ T \\
-&\syn{nothing}_b = (\syn{false}, \syn{pad}) \\[1em]
-&\syn{just}_b : T \to \syn{Maybe}_b\ T \\
-&\syn{just}_b = \lambda\ t.\  (\syn{true}, t) \\[1em]
-&\syn{maybe}_b : \{T : \univ_b\} \to (E : \syn{Maybe}_b\ T \to  \univ_c) \\
-\quad & \to E\ \syn{nothing} \to ((t : T) \to E\ (\syn{just}\ t)) \\
-\quad & \to (m : \syn{Maybe}_b\ T) \to E\ m \\
-&\syn{maybe}_b = \lambda\ E\ n\ j\ m.\ \ldots
+&\syn{Maybe}_b = \lambda\ T.\ \Sigma\ (x : \mathbb{2})\ (\syn{if}\ x\ \syn{then}\ T\ \syn{else}\ (\syn{Pad}\ b)) \\[1em]
+&\begin{alignedat}{2}
+&\syn{nothing}_b : \syn{Maybe}_b\ T  \qquad && \syn{just}_b : T \to \syn{Maybe}_b\ T \\
+&\syn{nothing}_b = (\syn{false}, \syn{pad}) && \syn{just}_b = \lambda\ t.\  (\syn{true}, t)
+\end{alignedat}
 \end{aligned}
 \]
+
+\paragraph{Example: Arrays}\label{arrays}
+
+We can extend the language with flat arrays of a statically known size $n : \syn{Nat}$ by
+$\syn{Array}\ n : \Ty\ \Gamma\ b \to \Ty\ \Gamma\ (n \times b)$, as well
+as of a runtime size $r : \Tm\ \Gamma\ \mathbb{N}$ by $\syn{DynArray}\ r : \Ty\ \Gamma\ b \to \Tm\ \Gamma\ \univ$
+whose inhabitants can only be accessed under a box. For example,
+\[
+\Sigma\ (n : \mathbb{N})\ (\El_\square\ (\syn{DynArray}\ n\ (\syn{Array}\ 2\ (\Pi_k\ A\ B))))
+\]
+is the type of dynamically-sized arrays of pairs of closures from $A$ to $B$ of capture size $k$.

@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex .out/main"] 1741370442 ".out/main.aux" ".out/main.bbl" ".out/main" 1741370531
-  ".out/main.aux" 1741370530 1939 22ff3ad025d212076c66df0c7c7b111d "pdflatex"
+["bibtex .out/main"] 1741371346 ".out/main.aux" ".out/main.bbl" ".out/main" 1741371484
+  ".out/main.aux" 1741371484 2095 1a65cb35b25f2288b0a8a331155bb3c5 "pdflatex"
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bib.bib" 1741370436 3869 fed5ae69a49cbe416ef3c9a52a5bbb15 ""
   (generated)
-  ".out/main.bbl"
   ".out/main.blg"
-["pdflatex"] 1741370530 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741370531
-  ".out/main.aux" 1741370530 1939 22ff3ad025d212076c66df0c7c7b111d "pdflatex"
-  ".out/main.bbl" 1741370442 1532 a7f9db8bf3113a0ac36e6581cefa4930 "bibtex .out/main"
-  ".out/main.out" 1741370530 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  ".out/main.bbl"
+["pdflatex"] 1741371483 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741371484
+  ".out/main.aux" 1741371484 2095 1a65cb35b25f2288b0a8a331155bb3c5 "pdflatex"
+  ".out/main.bbl" 1741371346 1532 a7f9db8bf3113a0ac36e6581cefa4930 "bibtex .out/main"
+  ".out/main.out" 1741371484 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -160,12 +160,12 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "body.tex" 1741370530 7743 51d248f83d098943bd6eb6fbe92b6ece ""
+  "body.tex" 1741371483 8316 cfd442289d6c9f5487644f1e308e9ab3 ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "preamble.tex" 1741288156 582 24f7b45c4fcb4432c8e36083ab22080d ""
   (generated)
+  ".out/main.out"
   ".out/main.pdf"
   ".out/main.aux"
   ".out/main.log"
-  ".out/main.out"
