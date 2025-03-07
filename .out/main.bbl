@@ -17,6 +17,11 @@ Danil Annenkov, Paolo Capriotti, Nicolai Kraus, and Christian Sattler.
 \newblock Two-level type theory and applications.
 \newblock {\em Math. Struct. Comput. Sci.}, 33(8):688--743, September 2023.
 
+\bibitem{Downen2024-nk}
+Paul Downen.
+\newblock Call-by-unboxed-value.
+\newblock {\em Proc. ACM Program. Lang.}, 8(ICFP):845--879, 21~August 2024.
+
 \bibitem{Kovacs2022-rf}
 Andr\'{a}s Kov\'{a}cs.
 \newblock Staged compilation with two-level type theory.
@@ -26,5 +31,10 @@ Andr\'{a}s Kov\'{a}cs.
 Andr\'{a}s Kov\'{a}cs.
 \newblock Closure-free functional programming in a two-level type theory.
 \newblock {\em Proc. ACM Program. Lang.}, 8(ICFP):659--692, 15~August 2024.
+
+\bibitem{Yallop2018-zw}
+Jeremy Yallop, Tamara von Glehn, and Ohad Kammar.
+\newblock Partially-static data as free extension of algebras.
+\newblock {\em Proc. ACM Program. Lang.}, 2(ICFP):1--30, 30~July 2018.
 
 \end{thebibliography}
