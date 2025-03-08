@@ -1,15 +1,15 @@
 # Fdb version 3
-["bibtex .out/main"] 1741476880 ".out/main.aux" ".out/main.bbl" ".out/main" 1741477498
-  ".out/main.aux" 1741477498 2193 fa3c1321e314cfd4ae62ee9048768b28 "pdflatex"
+["bibtex .out/main"] 1741476880 ".out/main.aux" ".out/main.bbl" ".out/main" 1741477948
+  ".out/main.aux" 1741477948 2193 fa3c1321e314cfd4ae62ee9048768b28 "pdflatex"
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bib.bib" 1741476467 4665 c1b9c614d48ce6abc4b5829c612d00ae ""
   (generated)
   ".out/main.blg"
   ".out/main.bbl"
-["pdflatex"] 1741477498 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741477498
-  ".out/main.aux" 1741477498 2193 fa3c1321e314cfd4ae62ee9048768b28 "pdflatex"
+["pdflatex"] 1741477947 "/Users/constantine/git/unboxed-types-2025/main.tex" ".out/main.pdf" "main" 1741477948
+  ".out/main.aux" 1741477948 2193 fa3c1321e314cfd4ae62ee9048768b28 "pdflatex"
   ".out/main.bbl" 1741476880 2004 c96b3f6b0aca371314e0fb6fd8d7f10a "bibtex .out/main"
-  ".out/main.out" 1741477498 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  ".out/main.out" 1741477948 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -159,12 +159,12 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "body.tex" 1741477498 8688 bbdeeeb3429d6ea4287085af08303f85 ""
+  "body.tex" 1741477947 8687 13c3e6d42348df10136a1cc22b959511 ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1741288751 352 ae56ef48cc7fe072e454c86dcc22f620 ""
   "preamble.tex" 1741288156 582 24f7b45c4fcb4432c8e36083ab22080d ""
   (generated)
-  ".out/main.log"
-  ".out/main.aux"
   ".out/main.pdf"
+  ".out/main.aux"
+  ".out/main.log"
   ".out/main.out"
