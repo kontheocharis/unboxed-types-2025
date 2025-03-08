@@ -27,6 +27,14 @@ Paul Downen.
 \newblock Call-by-unboxed-value.
 \newblock {\em Proc. ACM Program. Lang.}, 8(ICFP):845--879, 21~August 2024.
 
+\bibitem{Jones1991-ik}
+Simon L~Peyton Jones and John Launchbury.
+\newblock Unboxed values as first class citizens in a non-strict functional
+  language.
+\newblock In {\em Functional Programming Languages and Computer Architecture},
+  Lecture notes in computer science, pages 636--666. Springer Berlin
+  Heidelberg, Berlin, Heidelberg, 1991.
+
 \bibitem{Kovacs2022-rf}
 Andr\'{a}s Kov\'{a}cs.
 \newblock Staged compilation with two-level type theory.
