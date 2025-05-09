@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex out/main"] 1746807053 "out/main.aux" "out/main.bbl" "out/main" 1746807054
+["bibtex out/main"] 1746807134 "out/main.aux" "out/main.bbl" "out/main" 1746807151
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
-  "bib.bib" 1746806957 6673 ad7f8d53890171a682a892a1f58ca929 ""
-  "out/main.aux" 1746807054 2419 499125137062b02f2fa96a77a146e1e3 "pdflatex"
+  "bib.bib" 1746807151 6668 dc6e50a25074a242dc9a412294cfcbf7 ""
+  "out/main.aux" 1746807135 2419 499125137062b02f2fa96a77a146e1e3 "pdflatex"
   (generated)
   "out/main.bbl"
   "out/main.blg"
-["pdflatex"] 1746807053 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1746807054
+["pdflatex"] 1746807134 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1746807151
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1746805863 366 d51a82a922a9135f8b6abfff794e2309 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -152,12 +152,12 @@
   "body.tex" 1746807052 11986 40801618038fa2699b3eaa7cbbf85e24 ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1746805863 366 d51a82a922a9135f8b6abfff794e2309 ""
-  "out/main.aux" 1746807054 2419 499125137062b02f2fa96a77a146e1e3 "pdflatex"
-  "out/main.bbl" 1746807053 2185 efc73b1ed90919e5e392ec7ae13cbb24 "bibtex out/main"
-  "out/main.out" 1746807054 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "out/main.aux" 1746807135 2419 499125137062b02f2fa96a77a146e1e3 "pdflatex"
+  "out/main.bbl" 1746807134 2205 1e2f59710bf910eef9f4d6590caf9423 "bibtex out/main"
+  "out/main.out" 1746807135 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "preamble.tex" 1746795272 577 1f53739f65ef71f5d2be2f367c272372 ""
   (generated)
-  "out/main.pdf"
-  "out/main.aux"
-  "out/main.out"
   "out/main.log"
+  "out/main.pdf"
+  "out/main.out"
+  "out/main.aux"

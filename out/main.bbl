@@ -30,7 +30,7 @@ Paul Downen.
 \bibitem{Eisenberg2017-pq}
 Richard~A Eisenberg and Simon Peyton~Jones.
 \newblock Levity polymorphism.
-\newblock 52:525--539.
+\newblock {\em SIGPLAN Not.}, 52:525--539.
 
 \bibitem{Jones1991-ik}
 Simon L~Peyton Jones and John Launchbury.

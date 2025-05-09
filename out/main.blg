@@ -5,47 +5,46 @@ The style file: plain.bst
 Database file #1: bib.bib
 Warning--to sort, need author or key in rust-option
 Warning--empty year in Atkey2018-pj
-Warning--empty journal in Eisenberg2017-pq
 Warning--empty year in Eisenberg2017-pq
 You've used 11 entries,
             2118 wiz_defined-function locations,
-            578 strings with 5757 characters,
-and the built_in function-call counts, 3456 in all, are:
-= -- 356
+            579 strings with 5769 characters,
+and the built_in function-call counts, 3457 in all, are:
+= -- 357
 > -- 116
 < -- 2
 + -- 47
 - -- 36
 * -- 239
-:= -- 553
+:= -- 554
 add.period$ -- 34
 call.type$ -- 11
 change.case$ -- 51
 chr.to.int$ -- 0
-cite$ -- 15
+cite$ -- 14
 duplicate$ -- 135
 empty$ -- 300
 format.name$ -- 36
-if$ -- 733
+if$ -- 734
 int.to.chr$ -- 0
 int.to.str$ -- 11
 missing$ -- 9
 newline$ -- 57
 num.names$ -- 20
-pop$ -- 56
+pop$ -- 54
 preamble$ -- 1
 purify$ -- 40
 quote$ -- 0
 skip$ -- 100
 stack$ -- 0
 substring$ -- 252
-swap$ -- 27
+swap$ -- 28
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 44
-warning$ -- 4
+warning$ -- 3
 while$ -- 38
 width$ -- 13
-write$ -- 118
-(There were 4 warnings)
+write$ -- 119
+(There were 3 warnings)
