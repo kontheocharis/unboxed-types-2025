@@ -98,12 +98,12 @@ This type theory can be embedded as an object language $\mathbb{O}$ of a 2LTT.
 On the meta level, we have a type former $\mathbb{B} : \Ty_1$ of byte
 values, and term formers that mirror $\Bytes$.
 In an empty context, in the first-order formulation, we get an
-evaluation function $\syn{ev} : \Tm_1\ \cdot\ \mathbb{B} \to \Bytes$.
+evaluation function $\syn{ev} : \Tm_1\ \bullet\ \mathbb{B} \to \Bytes$.
 Adding $\Pi$ types to the meta language
 allows abstraction over byte values. Moreover, the meta level has a type former
 $\Uparrow_b : \Ty_0\ b \to \Ty_1$ for embedding $(B : \Tm_1\ \mathbb{B})$-sized types from
 the object fragment. If the final program is of the form $p :
-	\Tm_1\ \cdot\ (\Uparrow_k A)$, after staging we get an object term of size $\syn{ev}\ k$.
+	\Tm_1\ \bullet\ (\Uparrow_k A)$, after staging we get an object term of size $\syn{ev}\ k$.
 
 % \paragraph{Padding type and unit}\label{padding-type-and-unit}
 
