@@ -11,7 +11,7 @@ can be avoided, leading to efficient code that enables cache locality. This is
 done by \emph{indexing} syntactic types by a metatheoretic type describing
 memory layouts: $\Bytes$. This leads to a notion of representation polymorphism.
 Unboxed data in functional languages has been explored before
-\cite{Jones1991-ik,Downen2024-nk}, but results in overly restricted polymorphism
+\cite{Jones1991-ik,Eisenberg2017-pq,Downen2024-nk}, but results in overly restricted polymorphism
 or complex theories with multiple levels of kinds separating values and
 computations, and without support for full dependent types. Our approach is
 lightweight and extends to dependent types.
@@ -28,7 +28,7 @@ theory.
 We needn't compromise on the usage of dependent types either; as opposed to
 \cite{Kovacs2024-hn}, the object theory is itself dependently typed and thus we
 can encode unboxed higher-order polymorphic functions as part of the final
-program, as long as all \emph{sizes} (but not necessarily all types) are known after staging.
+program, because all \emph{sizes} (not necessarily all types) are known after staging.
 
 \paragraph{Basic setup}
 We formulate our system in the form of a second-order generalised

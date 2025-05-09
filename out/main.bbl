@@ -27,6 +27,11 @@ Paul Downen.
 \newblock Call-by-unboxed-value.
 \newblock {\em Proc. ACM Program. Lang.}, 8(ICFP):845--879, 21~August 2024.
 
+\bibitem{Eisenberg2017-pq}
+Richard~A Eisenberg and Simon Peyton~Jones.
+\newblock Levity polymorphism.
+\newblock 52:525--539.
+
 \bibitem{Jones1991-ik}
 Simon L~Peyton Jones and John Launchbury.
 \newblock Unboxed values as first class citizens in a non-strict functional
