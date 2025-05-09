@@ -64,7 +64,7 @@ the sum of the sizes of its types. The action of substitutions on types does not
 vary their sizes: $-[-] : \Ty\ \Gamma\ b \to \Sub\ \Delta\ \Gamma \to \Ty\
 	\Delta\ b$.
 
-\paragraph{Unboxed pairs, boxed and unboxed closures}\label{function-types}
+\paragraph{Functions and unboxed pairs}\label{function-types}
 
 This setup can be augmented with $\Pi$ and $\Sigma$ types, where the dependency
 is \emph{uniform} with respect to layout:
@@ -82,12 +82,12 @@ which might look like
 \[
 	\Pi_k : (A : \Ty\ a) \to (\Tm\ A \to \Ty\ b) \to (\ptr + k)  \,,
 \]
-annotated with the size of its captures $k$. Unfortunately, this is not
+annotated with the size of its captures $k$. This is not
 expressible as a second-order construct because its term former must know about
 captured variables:
 $\lambda : (\rho : \syn{Sub}\ \Gamma\ \Delta) \to \Tm\ (\Delta \rhd A)\ B \to \Tm\ \Gamma\ (\Pi_{\textrm{b}(\Delta)}\ A\ B)[\rho]$.
-This also means it is not immediately compatible with 2LTT. We leave investigating this
-as future work, but it works least in the absence of staging.
+This also means it is not immediately compatible with 2LTT. We leave this
+as future work, which would likely involve a modality for closed object terms.
 
 % In practice this substitution can be inferred from the surface program.
 
@@ -115,7 +115,7 @@ the object fragment. If the final program is of the form $p :
 % in memory. We can then define \(\mathbb{1} := \syn{Pad}\ 0\) and
 % \(\syn{tt} := \syn{pad}\).
 
-\paragraph{Example: Maybe as a tagged union}\label{maybe-as-a-tagged-union}
+\paragraph{Example: $\syn{Maybe}$ as a tagged union}\label{maybe-as-a-tagged-union}
 
 Let's take a look at how to define the \(\syn{Maybe}\) type internally in
 such a way that its data is stored contiguously as a tagged union without indirections.\footnote{This
@@ -137,7 +137,7 @@ $\syn{tt}$.
 \paragraph{Computational irrelevance and runtime-sized data}
 
 Annotating object-level types with bytes provides a convenient way to handle computational
-irrelevance without further modifying the structure of contexts. We can do this through
+irrelevance without further modifying the structure of contexts. This is possible through
 a monadic modality
 \[
 	| - | : \Ty\ b \to \Ty\ 0 \qquad \parallel - \parallel\ : \Tm\ A \to \Tm\ | A |
@@ -156,9 +156,20 @@ indexing the universe $\univ$ by partially-static \cite{Yallop2018-zw} byte
 values. Object-level types $\Ty\ b$ are now identified only with
 $\univ_{\syn{sta}\;b}$ where $\syn{sta} : \Tm_1\ \mathbb{B} \to \Tm_1\
 	\mathbb{B}^{\syn{PS}}$. We can then add appropriate type formers to the theory
-for the construction of runtime-sized data such as pairs. Boxing can now be relaxed
-to operate on runtime-sized data, which in particular enables the construction of runtime-polymorphic
-functions such as $\syn{id} : (A : \univ_b) \to \square A \to \square A$.
+for the construction of runtime-sized data such as pairs. Their inhabitants
+cannot directly be stored on the stack, but they can be constructed and
+manipulated on the heap. To do this, boxing is relaxed to allow runtime-sized
+data, and we must have a type for `generating' unsized data. We plan on presenting
+examples of this in our presentation.
+
+% A basic example is
+% the construction of arrays as iterated runtime-sized pairs, which can be stack
+% or heap allocated depending on if their size is known at compile-time.
+% \begin{align*}
+% 	 & \syn{Array} : (n : \syn{Nat}) \to (T : \univ_{\syn{sta}\; b}) \to \univ_{n \times \syn{sta}\; b} \\
+% 	 & \syn{Array}\ \syn{zero}\ T = \syn{Unit}                                                          \\
+% 	 & \syn{Array}\ (\syn{succ}\ n)\ T = T \times \syn{Array}\ n\ T                                     \\[1em]
+% \end{align*}
 
 % We also have an eliminator for irrelevant types
 % \[
@@ -179,7 +190,7 @@ terms of an untyped lambda calculus which is nevertheless \emph{sized} just like
 the system we presented. Crucially, the sizes of all constructs in this target language
 must be \emph{non-zero}, which forces us to translate away all zero-sized types. This
 justifies the irrelevance modality as well as the erased codes for types. We are
-currently working on a proof-of-concept implementation of this system which is backed by
+currently working on a proof-of-concept implementation of this system backed by
 LLVM.
 
 % \paragraph{Example: Arrays}\label{arrays}

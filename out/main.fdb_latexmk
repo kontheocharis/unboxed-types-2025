@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex out/main"] 1746802224 "out/main.aux" "out/main.bbl" "out/main" 1746802416
+["bibtex out/main"] 1746803725 "out/main.aux" "out/main.bbl" "out/main" 1746803732
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bib.bib" 1746799769 6254 f36b80be6434f836e3724255c53b2c44 ""
-  "out/main.aux" 1746802415 2366 3e0aa85f094d9af4f6fd3212b49ef161 "pdflatex"
+  "out/main.aux" 1746803732 2360 863f11504b34a455d770c6569b650569 "pdflatex"
   (generated)
-  "out/main.blg"
   "out/main.bbl"
-["pdflatex"] 1746802415 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1746802416
+  "out/main.blg"
+["pdflatex"] 1746803732 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1746803732
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1746628490 343 aadbf50868163a6d955511285f708e3a ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -38,6 +38,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr9.tfm" 1136768653 1292 6b21b9c2c7bebb38aa2273f7ca0fb3af ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss10.tfm" 1136768653 1316 b636689f1933f24d1294acdf6041daaa ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmss8.tfm" 1136768653 1296 d77f431d10d47c8ea2cc18cf45346274 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmssbx10.tfm" 1136768653 1272 e2d13f0df30bf3ad990bb9d028e37f34 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm" 1136768653 1116 25a7bf822c58caf309a702ef79f4afbb ""
@@ -63,6 +64,7 @@
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb" 1248133631 33993 9b89b85fd2d9df0482bd47194d1d3bf3 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb" 1248133631 24457 5cbb7bdf209d5d1ce9892a9b80a307cc ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb" 1248133631 24420 52dbb8e8aa0069a1b987309557f8d303 ""
+  "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb" 1248133631 28902 2f5c04fd2884d1878057baa5aad22765 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb" 1248133631 37944 359e864bd06cde3b1cf57bb20757fb06 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb" 1248133631 36310 f5ddc6715cc60deb16d9db5ded6a9391 ""
@@ -147,15 +149,15 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "body.tex" 1746802415 11355 df2577ec4a896ddca52e0670c804ce46 ""
+  "body.tex" 1746803732 11948 4ebcc093e27f0727617c904b10d8bd0b ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1746628490 343 aadbf50868163a6d955511285f708e3a ""
-  "out/main.aux" 1746802415 2366 3e0aa85f094d9af4f6fd3212b49ef161 "pdflatex"
-  "out/main.bbl" 1746802224 2059 a9a9f52a8dbada379fa9519f57f1f137 "bibtex out/main"
-  "out/main.out" 1746802415 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "out/main.aux" 1746803732 2360 863f11504b34a455d770c6569b650569 "pdflatex"
+  "out/main.bbl" 1746803725 2059 a9a9f52a8dbada379fa9519f57f1f137 "bibtex out/main"
+  "out/main.out" 1746803732 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "preamble.tex" 1746795272 577 1f53739f65ef71f5d2be2f367c272372 ""
   (generated)
-  "out/main.pdf"
-  "out/main.aux"
   "out/main.log"
+  "out/main.pdf"
   "out/main.out"
+  "out/main.aux"
