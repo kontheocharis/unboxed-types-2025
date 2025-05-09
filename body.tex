@@ -1,19 +1,20 @@
 When the reduction rules of type theory become part of its static semantics, it
-is impossible to always compute the memory layout of a type during compilation.
+is sometimes impossible to compute the memory size in bytes of a type during compilation.
 This happens when polymorphism is present but monomorphisation is not, and in
 particular when dependent types are part of the mix, since the dependency might
 be on runtime values.
 
 In this ongoing work, we formulate a dependent type theory where the memory size
-of a type is always known at compile-time, and thus compilation can directly target a
-language like C. Indirection is opt-in and can be avoided, leading to efficient
-code that enables cache locality. This is done by \emph{indexing} syntactic
-types by a metatheoretic type describing memory layouts: $\Bytes$. This leads to
-a notion of representation polymorphism. Unboxed data in functional languages
-has been explored before \cite{Jones1991-ik,Downen2024-nk}, but results in
-overly restricted polymorphism or complex theories with multiple levels of kinds
-separating values and computations, and without support for full dependent
-types. Our approach is lightweight and extends to dependent types.
+of a type is always known at compile-time, and thus compilation can directly
+target a low-level language. Boxing is opt-in and
+can be avoided, leading to efficient code that enables cache locality. This is
+done by \emph{indexing} syntactic types by a metatheoretic type describing
+memory layouts: $\Bytes$. This leads to a notion of representation polymorphism.
+Unboxed data in functional languages has been explored before
+\cite{Jones1991-ik,Downen2024-nk}, but results in overly restricted polymorphism
+or complex theories with multiple levels of kinds separating values and
+computations, and without support for full dependent types. Our approach is
+lightweight and extends to dependent types.
 
 The staging view of \emph{two-level type theory} (2LTT) \cite{Annenkov2023-vk}
 has been explored by Kov\'acs in the general setting \cite{Kovacs2022-rf} as
@@ -46,7 +47,7 @@ bytes:\footnote{For brevity we will not regard issues of universe sizing, but th
 	be accomodated without issue.} $\Ty : \Bytes \to \Set$.
 We have the following basic type and term formers:
 \begin{align*}
-	 & \univ_{\_} : \Bytes \to \Ty\ 0\qquad \Tm\ \univ_b = \Ty\ b  \qquad  \univ : \Ty \ 0             \\
+	 & \univ_{\_} : \Bytes \to \Ty\ 0\qquad \Tm\ \univ_b = \Ty\ b                                      \\
 	 & \square : \Ty\ b \to \Ty\ \ptr\qquad \syn{box} : \Tm\ \square A \simeq \Tm\ A : \syn{unbox} \,.
 \end{align*}
 The universe \(\univ_b\) describes types whose inhabitants take up \(b\) bytes, with a Grothendiek-style
@@ -120,16 +121,16 @@ the object fragment. If the final program is of the form $p :
 Let's take a look at how to define the \(\syn{Maybe}\) type internally in
 such a way that its data is stored contiguously as a tagged union without indirections.\footnote{This
 	is similar to the approach of languages such as Rust \cite{rust-option}.}.
-We assume access to a type $\syn{Pad}\ b : \Ty\ b$ which is the unit
+We assume access to a type $\syn{Pad}\ b : \univ_b$ which is the unit
 type that takes up $b$ bytes, with sole constructor $\syn{pad}$ akin to
-$\syn{tt}$.
+$\syn{tt}$, and $\syn{Bool} : \univ_1$ which takes up a single byte:
 \[
 	\begin{aligned}
-		 & \syn{Maybe}_b : (T : \univ_b) \to \univ_{1 + b}                                                                                  \\
-		 & \syn{Maybe}_b\ T = \Sigma\ (x : \syn{Bool})\ (\syn{if}\ x\ \syn{then}\ T\ \syn{else}\ (\syn{Pad}\ b))                            \\[1em]
+		 & \syn{Maybe} : (T : \univ_b) \to \univ_{1 + b}                                                                            \\
+		 & \syn{Maybe}\ T = (x : \syn{Bool}) \times \syn{if}\ x\ \syn{then}\ T\ \syn{else}\ \syn{Pad}\ b                            \\[1em]
 		 & \begin{alignedat}{2}
-			    & \syn{nothing}_b : \{T : \univ_b\} \to \syn{Maybe}_b\ T  \qquad &  & \syn{just}_b : \{T : \univ_b\} \to T \to \syn{Maybe}_b\ T \\
-			    & \syn{nothing}_b = (\syn{false}, \syn{pad})                     &  & \syn{just}_b = \lambda\ t.\  (\syn{true}, t)
+			    & \syn{nothing} : \{T : \univ_b\} \to \syn{Maybe}\ T  \qquad &  & \syn{just} : \{T : \univ_b\} \to T \to \syn{Maybe}\ T \\
+			    & \syn{nothing} = (\syn{false}, \syn{pad})                   &  & \syn{just} = \lambda\ t.\  (\syn{true}, t)
 		   \end{alignedat}
 	\end{aligned}
 \]
