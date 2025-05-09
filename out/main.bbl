@@ -55,6 +55,10 @@ Andr\'{a}s Kov\'{a}cs.
 \newblock Closure-free functional programming in a two-level type theory.
 \newblock {\em Proc. ACM Program. Lang.}, 8(ICFP):659--692, 15~August 2024.
 
+\bibitem{Uemura2021-jq}
+Taichi Uemura.
+\newblock Abstract and concrete type theories.
+
 \bibitem{Yallop2018-zw}
 Jeremy Yallop, Tamara von Glehn, and Ohad Kammar.
 \newblock Partially-static data as free extension of algebras.

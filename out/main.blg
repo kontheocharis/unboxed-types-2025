@@ -3,48 +3,50 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: out/main.aux
 The style file: plain.bst
 Database file #1: bib.bib
+Warning--entry type for "Uemura2021-jq" isn't style-file defined
+--line 197 of file bib.bib
 Warning--to sort, need author or key in rust-option
 Warning--empty year in Atkey2018-pj
 Warning--empty year in Eisenberg2017-pq
-You've used 11 entries,
+You've used 12 entries,
             2118 wiz_defined-function locations,
-            579 strings with 5769 characters,
-and the built_in function-call counts, 3457 in all, are:
-= -- 357
-> -- 116
+            583 strings with 5844 characters,
+and the built_in function-call counts, 3650 in all, are:
+= -- 373
+> -- 123
 < -- 2
-+ -- 47
-- -- 36
-* -- 239
-:= -- 554
-add.period$ -- 34
-call.type$ -- 11
-change.case$ -- 51
++ -- 50
+- -- 38
+* -- 244
+:= -- 585
+add.period$ -- 36
+call.type$ -- 12
+change.case$ -- 55
 chr.to.int$ -- 0
-cite$ -- 14
-duplicate$ -- 135
-empty$ -- 300
-format.name$ -- 36
-if$ -- 734
+cite$ -- 15
+duplicate$ -- 142
+empty$ -- 322
+format.name$ -- 38
+if$ -- 776
 int.to.chr$ -- 0
-int.to.str$ -- 11
+int.to.str$ -- 12
 missing$ -- 9
-newline$ -- 57
-num.names$ -- 20
-pop$ -- 54
+newline$ -- 61
+num.names$ -- 22
+pop$ -- 62
 preamble$ -- 1
-purify$ -- 40
+purify$ -- 43
 quote$ -- 0
-skip$ -- 100
+skip$ -- 110
 stack$ -- 0
-substring$ -- 252
-swap$ -- 28
+substring$ -- 257
+swap$ -- 29
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 44
+type$ -- 48
 warning$ -- 3
-while$ -- 38
-width$ -- 13
-write$ -- 119
-(There were 3 warnings)
+while$ -- 40
+width$ -- 14
+write$ -- 126
+(There were 4 warnings)
