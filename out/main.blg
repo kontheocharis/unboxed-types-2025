@@ -1,0 +1,49 @@
+This is BibTeX, Version 0.99d (TeX Live 2021)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: out/main.aux
+The style file: plain.bst
+Database file #1: bib.bib
+Warning--to sort, need author or key in rust-option
+Warning--empty year in Atkey2018-pj
+You've used 10 entries,
+            2118 wiz_defined-function locations,
+            572 strings with 5652 characters,
+and the built_in function-call counts, 3128 in all, are:
+= -- 323
+> -- 103
+< -- 2
++ -- 42
+- -- 32
+* -- 214
+:= -- 500
+add.period$ -- 31
+call.type$ -- 10
+change.case$ -- 46
+chr.to.int$ -- 0
+cite$ -- 12
+duplicate$ -- 124
+empty$ -- 274
+format.name$ -- 32
+if$ -- 668
+int.to.chr$ -- 0
+int.to.str$ -- 10
+missing$ -- 8
+newline$ -- 52
+num.names$ -- 18
+pop$ -- 49
+preamble$ -- 1
+purify$ -- 36
+quote$ -- 0
+skip$ -- 93
+stack$ -- 0
+substring$ -- 222
+swap$ -- 27
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 40
+warning$ -- 2
+while$ -- 34
+width$ -- 12
+write$ -- 109
+(There were 2 warnings)

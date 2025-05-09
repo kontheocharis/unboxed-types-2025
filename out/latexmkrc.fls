@@ -1,0 +1,6 @@
+PWD /Users/constantine/git/unboxed-types-2025
+INPUT /usr/local/texlive/2021/texmf.cnf
+INPUT /usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/constantine/git/unboxed-types-2025/latexmkrc
+OUTPUT out/latexmkrc.log

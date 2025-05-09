@@ -1,0 +1,11 @@
+# Fdb version 3
+["pdflatex"] 1746628263 "/Users/constantine/git/unboxed-types-2025/latexmkrc" "out/latexmkrc.pdf" "latexmkrc" 1746628263
+  "/Users/constantine/git/unboxed-types-2025/latexmkrc" 1746628263 128 adf45453fdd4364d732d64cc207e3907 ""
+  "/usr/local/texlive/2021/texmf-dist/web2c/texmf.cnf" 1616443989 39972 3d6bb4d9d719e93193fa020b58adf5d4 ""
+  "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
+  "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
+  "latexmkrc" 1746628263 128 adf45453fdd4364d732d64cc207e3907 ""
+  "out/latexmkrc.aux" 1746628263 8 a94a2480d3289e625eea47cd1b285758 ""
+  (generated)
+  "out/latexmkrc.pdf"
+  "out/latexmkrc.log"

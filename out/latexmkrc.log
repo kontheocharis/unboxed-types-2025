@@ -1,0 +1,101 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.12.29)  7 MAY 2025 16:31
+entering extended mode
+ \write18 enabled.
+ %&-line parsing enabled.
+**/Users/constantine/git/unboxed-types-2025/latexmkrc
+(/Users/constantine/git/unboxed-types-2025/latexmkrc
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-02-18>
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 $
+     pdflatex = 'pdflatex -interaction=nonstopmode -shell-escape';
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 1.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 1.
+! Missing $ inserted.
+<inserted text> 
+                $
+l.2 
+    
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+Overfull \hbox (70.35188pt too wide) in paragraph at lines 1--2
+[]$\OML/cmm/m/it/10 pdflatex \OT1/cmr/m/n/10 =[]
+ []
+
+
+Overfull \hbox (44.76862pt too wide) in paragraph at lines 1--2
+\OML/cmm/m/it/10 pdflatex \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (60.57901pt too wide) in paragraph at lines 1--2
+\OML/cmm/m/it/10 interaction \OT1/cmr/m/n/10 =
+ []
+
+
+Overfull \hbox (66.29532pt too wide) in paragraph at lines 1--2
+\OML/cmm/m/it/10 nonstopmode \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (29.2443pt too wide) in paragraph at lines 1--2
+\OML/cmm/m/it/10 shell \OMS/cmsy/m/n/10 ^^@
+ []
+
+
+Overfull \hbox (34.22807pt too wide) in paragraph at lines 1--2
+\OML/cmm/m/it/10 escape[]\OT1/cmr/m/n/10 ;$ 
+ []
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.3 $
+     pdf_mode = 1;
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no o in font nullfont!
+Missing character: There is no u in font nullfont!
+Missing character: There is no t in font nullfont!
+! Missing $ inserted.
+<inserted text> 
+                $
+l.5 $out_
+         dir = 'out';
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+)
+! Emergency stop.
+<*> ...onstantine/git/unboxed-types-2025/latexmkrc
+                                                  
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 20 strings out of 478994
+ 543 string characters out of 5858183
+ 283044 words of memory out of 5000000
+ 17604 multiletter control sequences out of 15000+600000
+ 403430 words of font info for 27 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 18i,2n,15p,145b,56s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

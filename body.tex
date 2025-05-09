@@ -1,19 +1,19 @@
-When the reduction rules of type theory become part of the static semantics, it
+When the reduction rules of type theory become part of its static semantics, it
 is impossible to always compute the memory layout of a type during compilation.
 This happens when polymorphism is present but monomorphisation is not, and in
 particular when dependent types are part of the mix, since the dependency might
 be on runtime values.
 
-In this ongoing work, we formulate a dependent type theory where sizes of types
-are always known at compile-time, and thus compilation can target a language
-like C. Indirection is opt-in and can be avoided, leading to efficient code that
-enables cache locality. This is done by \emph{indexing} syntactic types by a
-metatheoretic type describing memory layouts: $\Bytes$. This leads to a notion
-of representation polymorphism. Unboxed data in functional languages has been
-explored before \cite{Jones1991-ik,Downen2024-nk}, but results in overly restricted
-polymorphism or complex theories with multiple levels of kinds separating values and computations, and without
-support for full dependent types. Our approach is lightweight and extends to
-full dependent types.
+In this ongoing work, we formulate a dependent type theory where the memory size
+of a type is always known at compile-time, and thus compilation can directly target a
+language like C. Indirection is opt-in and can be avoided, leading to efficient
+code that enables cache locality. This is done by \emph{indexing} syntactic
+types by a metatheoretic type describing memory layouts: $\Bytes$. This leads to
+a notion of representation polymorphism. Unboxed data in functional languages
+has been explored before \cite{Jones1991-ik,Downen2024-nk}, but results in
+overly restricted polymorphism or complex theories with multiple levels of kinds
+separating values and computations, and without support for full dependent
+types. Our approach is lightweight and extends to dependent types.
 
 The staging view of \emph{two-level type theory} (2LTT) \cite{Annenkov2023-vk}
 has been explored by Kov\'acs in the general setting \cite{Kovacs2022-rf} as
@@ -30,79 +30,79 @@ can encode unboxed higher-order polymorphic functions as part of the final
 program, as long as all \emph{sizes} (but not necessarily all types) are known after staging.
 
 \paragraph{Basic setup}
-We formulate our system as an MLTT-style type theory, using the intrinsic QIIT
-syntax of Altenkirch and Kaposi \cite{Altenkirch2016-zc}.
-We assume access to a metatheoretic type of
+We formulate our system in the form of a second-order generalised
+algebraic theory (SOGAT) \cite{Kaposi2024-db}.
+We assume a metatheoretic type of
 \(\Bytes\) with
 \[
-0, 1 : \Bytes \qquad \qquad + : \Bytes \to \Bytes \to \Bytes \qquad \ptr : \Bytes \qquad \times : \syn{Nat} \to \Bytes \to \Bytes \,.
+	0, 1 : \Bytes \qquad \qquad + : \Bytes \to \Bytes \to \Bytes \qquad \ptr : \Bytes \qquad \times : \syn{Nat} \to \Bytes \to \Bytes \,.
 \]
 The constant \(\ptr\) defines the size of a pointer. Any model of
 the signature above will suffice; such a model might encode a sophisticated
 layout algorithm with padding, for example.
 
-First, types are indexed not just by contexts, but also by
+To begin with, types are indexed by
 bytes:\footnote{For brevity we will not regard issues of universe sizing, but this can
-be accomodated without issue.} $\Ty : \Con \to \Bytes \to \Set$.
+	be accomodated without issue.} $\Ty : \Bytes \to \Set$.
 We have the following basic type and term formers:
-{\small%
-\[
-\begin{alignedat}{3}
-&\univ_{\_} : \Bytes \to \Ty\ \Gamma\ 0 \quad  &&\El : \Tm\ \Gamma\ \univ_b \simeq \Ty\ \Gamma\ b : \code \quad  &&\langle-\rangle : \Tm\ \Gamma\ \univ_b \to \Tm\ \Gamma\ \univ \\
-&\univ : \Ty\ \Gamma\ 0 \quad &&\El_\square : \Tm\ \Gamma\ \univ \to \Ty\ \Gamma\ \ptr\quad  && \syn{box} : \Tm\ \Gamma\ A \simeq \Tm\ \Gamma\ (\El_\square\ \langle\code\ A\rangle) : \syn{unbox} \\
-\end{alignedat}
-\]}
-
-The type \(\univ\) is the type of codes for types of an unknown size, while the
-\(\univ_b\) type is the type of codes for types of size \(b\). The \(\El\)
-interpretation maps codes for types of size \(b\) to actual types of size \(b\),
-while the \(\El_\square\) interpretation maps codes for any type to actual types
-which \emph{box} their contents. In other words, internally, if \(A : \univ\),
-then \(\El_\square\ A\) can be used as a type and at runtime the data of \(A\)
-will be under a heap-allocated pointer indirection. On the other hand, if \(B :
-\univ_b\), then \(\El\ B\) can be used as a type and at runtime the data of
-\(B\) will be stored \emph{inline}, since it is known that \(B\) takes up
-exactly \(b\) bytes. Codes for types of any kind take up no space at runtime
-because they are erased.
-Additionally, for any code \(t\) in \(\univ_b\), we can get a code
-\(\langle t \rangle\) in \(\univ\) by `forgetting' that the size
-of \(t\) is \(b\). Finally, we have boxing and unboxing operators for types of a known size.
-Contexts $\Gamma$ store the size of each type, such that $|\Gamma| : \Bytes$ is the sum
-of the sizes of its types. The action of
-substitutions on types does not vary their sizes: $-[-] : \Ty\ \Gamma\ b \to
-\Sub\ \Delta\ \Gamma \to \Ty\ \Delta\ b$.
+\begin{align*}
+	 & \univ_{\_} : \Bytes \to \Ty\ 0\qquad \Tm\ \univ_b = \Ty\ b  \qquad  \univ : \Ty \ 0             \\
+	 & \square : \Ty\ b \to \Ty\ \ptr\qquad \syn{box} : \Tm\ \square A \simeq \Tm\ A : \syn{unbox} \,.
+\end{align*}
+The universe \(\univ_b\) describes types whose inhabitants take up \(b\) bytes, with a Grothendiek-style
+identification $\Tm\ \univ_b = \Ty\ b$. The \(\square\) type former takes sized types
+to types which \emph{box} their contents. In other words, for a type $A$ of some
+size $a$, an inhabitant of data of \(\square A\) will be stored on the heap
+behind a pointer indirection. On the other hand, an inhabitant of \(A\) will be
+stored \emph{inline} on the stack, since it is known that \(A\) takes up exactly
+\(a\) bytes. Codes for types of any kind take up no space at runtime because
+they are erased. Additionally, we have boxing and unboxing operators for types
+of a known size. Since we present this as a second-order theory, we can mechanically derive
+its first-order presentation \cite{Kaposi2024-db}, with explicit contexts. There, contexts $\Gamma$
+record the size of each type, such that $\textrm{b}( \Gamma) : \Bytes$ can be defined as
+the sum of the sizes of its types. The action of substitutions on types does not
+vary their sizes: $-[-] : \Ty\ \Gamma\ b \to \Sub\ \Delta\ \Gamma \to \Ty\
+	\Delta\ b$.
 
 \paragraph{Unboxed pairs, boxed and unboxed closures}\label{function-types}
 
 This setup can be augmented with $\Pi$ and $\Sigma$ types, where the dependency
 is \emph{uniform} with respect to layout:
 \begin{align*}
-&\Pi_\square : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ (\ptr + \ptr) \\
-&\Pi_k : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ (k + \ptr) \\
-&\Sigma : (A : \Ty\ \Gamma\ a) \to \Ty\ (\Gamma \rhd A)\ b \to \Ty\ \Gamma\ (a + b)
+	 & \Pi : (A : \Ty\ a) \to (\Tm\ A \to \Ty\ b) \to \Ty\ \ptr           \\
+	 & \Sigma : (A : \Ty\ a) \to (\Tm\ A \to \Ty\ b) \to \Ty\ (a + b) \,.
 \end{align*}
-For functions, we have a choice of whether to box the captures or
-not. In the latter case, we must annotate them with the size of their captures.
+For functions, we store a pointer to an allocation containing both code and data.
+Alternatively, we could separate the two by sizing functions as $\ptr + \ptr$.
 Conversely, pairs are stored inline; their size is the sum of the sizes of their
-components. The term formers remain mostly unchanged; the only new case is
-$\Pi_k$ whose lambda terms declare their captures through a substitution:
-$\lambda : (\rho : \syn{Sub}\ \Gamma\ \Delta) \to \Tm\ (\Delta \rhd A)\ B \to \Tm\ \Gamma\ (\Pi_{|\Delta|}\ A\ B)[\rho]$.
-In practice this substitution can be inferred from the surface program.
+components. The term formers remain unchanged.
+
+It could be desirable to have a function type with \emph{unboxed} captures,
+which might look like
+\[
+	\Pi_k : (A : \Ty\ a) \to (\Tm\ A \to \Ty\ b) \to (\ptr + k)  \,,
+\]
+annotated with the size of its captures $k$. Unfortunately, this is not
+expressible as a second-order construct because its term former must know about
+captured variables:
+$\lambda : (\rho : \syn{Sub}\ \Gamma\ \Delta) \to \Tm\ (\Delta \rhd A)\ B \to \Tm\ \Gamma\ (\Pi_{\textrm{b}(\Delta)}\ A\ B)[\rho]$.
+This also means it is not immediately compatible with 2LTT. We leave investigating this
+as future work, but it works least in the absence of staging.
+
+% In practice this substitution can be inferred from the surface program.
 
 \paragraph{First-class byte values with staging}\label{layouts-staging}
 
 This type theory can be embedded as an object language $\mathbb{O}$ of a 2LTT.
-On the meta level, we have a type former $\mathbb{b} : \Ty_1\ \Gamma$ of byte
-values, and term formers that mirror $\Bytes$.\footnote{%
-More precisely, a free extension \cite{Yallop2018-zw} of $\Bytes$ by the
-meta-level syntax.}
-In an empty context, in a theory with canonicity, we get an
-evaluation function $\syn{ev} : \Tm_1\ \cdot\ \mathbb{b} \to \Bytes$.
+On the meta level, we have a type former $\mathbb{B} : \Ty_1$ of byte
+values, and term formers that mirror $\Bytes$.
+In an empty context, in the first-order formulation, we get an
+evaluation function $\syn{ev} : \Tm_1\ \cdot\ \mathbb{B} \to \Bytes$.
 Adding $\Pi$ types to the meta language
 allows abstraction over byte values. Moreover, the meta level has a type former
-$\Uparrow_b : \Ty_0\ \Gamma\ b \to \Ty_1\ \Gamma$ for embedding $(b : \Tm\ \Gamma\ \mathbb{b})$-sized types from
+$\Uparrow_b : \Ty_0\ b \to \Ty_1$ for embedding $(B : \Tm_1\ \mathbb{B})$-sized types from
 the object fragment. If the final program is of the form $p :
-\Tm_1\ \cdot\ (\Uparrow_k A)$, after staging we get an object term of size $\syn{ev}\ k$.
+	\Tm_1\ \cdot\ (\Uparrow_k A)$, after staging we get an object term of size $\syn{ev}\ k$.
 
 % \paragraph{Padding type and unit}\label{padding-type-and-unit}
 
@@ -115,34 +115,80 @@ the object fragment. If the final program is of the form $p :
 % in memory. We can then define \(\mathbb{1} := \syn{Pad}\ 0\) and
 % \(\syn{tt} := \syn{pad}\).
 
-
-
 \paragraph{Example: Maybe as a tagged union}\label{maybe-as-a-tagged-union}
 
 Let's take a look at how to define the \(\syn{Maybe}\) type internally in
 such a way that its data is stored contiguously as a tagged union without indirections.\footnote{This
-is similar to the approach of languages such as Rust \cite{rust-option}.}.
-We assume access to a type $\syn{Pad}\ b : \Ty\ \Gamma\ b$ which is the unit
+	is similar to the approach of languages such as Rust \cite{rust-option}.}.
+We assume access to a type $\syn{Pad}\ b : \Ty\ b$ which is the unit
 type that takes up $b$ bytes, with sole constructor $\syn{pad}$ akin to
 $\syn{tt}$.
 \[
-\begin{aligned}
-&\syn{Maybe}_b : \Pi_0\ (T : \univ_b)\ \univ_{1 + b} \\
-&\syn{Maybe}_b = \lambda\ T.\ \Sigma\ (x : \mathbb{2})\ (\syn{if}\ x\ \syn{then}\ T\ \syn{else}\ (\syn{Pad}\ b)) \\[1em]
-&\begin{alignedat}{2}
-&\syn{nothing}_b : \Pi_0\ (T : \univ_b)\ (\syn{Maybe}_b\ T)  \qquad && \syn{just}_b : \Pi_0\ (T : \univ_b)\ \Pi_0\ T\ (\syn{Maybe}_b\ T) \\
-&\syn{nothing}_b = \lambda\ \_ .\ (\syn{false}, \syn{pad}) && \syn{just}_b = \lambda\ \_\ t.\  (\syn{true}, t)
-\end{alignedat}
-\end{aligned}
+	\begin{aligned}
+		 & \syn{Maybe}_b : (T : \univ_b) \to \univ_{1 + b}                                                                                  \\
+		 & \syn{Maybe}_b\ T = \Sigma\ (x : \syn{Bool})\ (\syn{if}\ x\ \syn{then}\ T\ \syn{else}\ (\syn{Pad}\ b))                            \\[1em]
+		 & \begin{alignedat}{2}
+			    & \syn{nothing}_b : \{T : \univ_b\} \to \syn{Maybe}_b\ T  \qquad &  & \syn{just}_b : \{T : \univ_b\} \to T \to \syn{Maybe}_b\ T \\
+			    & \syn{nothing}_b = (\syn{false}, \syn{pad})                     &  & \syn{just}_b = \lambda\ t.\  (\syn{true}, t)
+		   \end{alignedat}
+	\end{aligned}
 \]
 
-\paragraph{Example: Arrays}\label{arrays}
+\paragraph{Computational irrelevance and runtime-sized data}
 
-We can extend the language with flat arrays of a statically known size $n : \syn{Nat}$ by
-$\syn{Array}\ n : \Ty\ \Gamma\ b \to \Ty\ \Gamma\ (n \times b)$, as well
-as of a runtime size $r : \Tm\ \Gamma\ \mathbb{N}$ by $\syn{DynArray}\ r : \Ty\ \Gamma\ b \to \Tm\ \Gamma\ \univ$
-whose inhabitants can only be accessed under a box. For example,
+Annotating object-level types with bytes provides a convenient way to handle computational
+irrelevance without further modifying the structure of contexts. We can do this through
+a monadic modality
 \[
-\Sigma\ (n : \mathbb{N})\ (\El_\square\ (\syn{DynArray}\ n\ (\syn{Array}\ 2\ (\Pi_k\ A\ B))))
+	| - | : \Ty\ b \to \Ty\ 0 \qquad \parallel - \parallel\ : \Tm\ A \to \Tm\ | A |
 \]
-is the type of dynamically-sized arrays of pairs of closures from $A$ to $B$ of capture size $k$.
+which is idempotent by $(A : \Ty\ 0) \to | A | = A$, extending to all zero-sized types.
+It also has an appropriate eliminator form.
+With this we can
+reproduce, for example, quantitative type theory instantiated with the $\{0,\omega\}$ semiring
+\cite{Atkey2018-pj}. This means that we can now use object-level types which are
+entirely erased: $\syn{reverse} : \{n : | \syn{Nat} |\} \to \syn{Vect}\ T\ n \to \syn{Vect}\ T\ n$.
+
+Additionally, we often want to handle data whose size is \emph{not} known at
+compile-time, but is known at runtime; most commonly, heap-backed arrays, but
+also other dynamically-sized flat data structures. This is achievable by
+indexing the universe $\univ$ by partially-static \cite{Yallop2018-zw} byte
+values. Object-level types $\Ty\ b$ are now identified only with
+$\univ_{\syn{sta}\;b}$ where $\syn{sta} : \Tm_1\ \mathbb{B} \to \Tm_1\
+	\mathbb{B}^{\syn{PS}}$. We can then add appropriate type formers to the theory
+for the construction of runtime-sized data such as pairs. Boxing can now be relaxed
+to operate on runtime-sized data, which in particular enables the construction of runtime-polymorphic
+functions such as $\syn{id} : (A : \univ_b) \to \square A \to \square A$.
+
+% We also have an eliminator for irrelevant types
+% \[
+% 	\syn{elim-}|| : (P : |A| \to U_0) \to ((a : A) \to P \parallel a \parallel) \to (a : |A|) \to P\ a  \,, \\
+% \]
+% which says we can assume any irrelevant data is relevant, as long as we produce
+% something zero-sized in the end. It comes with the computation rule
+% $\syn{elim-}||\ P\ f\ (\parallel a \parallel) = f\ a$ similar to the usual
+% eliminators for modal types \cite{Gratzer2020-hi}.
+% In practice, invocations of $\parallel - \parallel$ can be inferred, and
+% $\syn{elim-}||$ can be presented as a `let' expression.
+
+\paragraph{Formalisation, semantics and implementation}
+
+We have formalised most parts of the sketched system by a shallow embedding in
+Agda, including the irrelevance modality. We have also formulated a semantics in
+terms of an untyped lambda calculus which is nevertheless \emph{sized} just like
+the system we presented. Crucially, the sizes of all constructs in this target language
+must be \emph{non-zero}, which forces us to translate away all zero-sized types. This
+justifies the irrelevance modality as well as the erased codes for types. We are
+currently working on a proof-of-concept implementation of this system which is backed by
+LLVM.
+
+% \paragraph{Example: Arrays}\label{arrays}
+
+% We can extend the language with flat arrays of a statically known size $n : \syn{Nat}$ by
+% $\syn{Array}\ n : \Ty\ \Gamma\ b \to \Ty\ \Gamma\ (n \times b)$, as well
+% as of a runtime size $r : \Tm\ \Gamma\ \mathbb{N}$ by $\syn{DynArray}\ r : \Ty\ \Gamma\ b \to \Tm\ \Gamma\ \univ$
+% whose inhabitants can only be accessed under a box. For example,
+% \[
+% 	\Sigma\ (n : \mathbb{N})\ (\El_\square\ (\syn{DynArray}\ n\ (\syn{Array}\ 2\ (\Pi_k\ A\ B))))
+% \]
+% is the type of dynamically-sized arrays of pairs of closures from $A$ to $B$ of capture size $k$.
