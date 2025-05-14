@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex out/main"] 1746813987 "out/main.aux" "out/main.bbl" "out/main" 1746813987
+["bibtex out/main"] 1747221163 "out/main.aux" "out/main.bbl" "out/main" 1747221189
   "/usr/local/texlive/2021/texmf-dist/bibtex/bst/base/plain.bst" 1292289607 20613 bd3fbfa9f64872b81ac57a0dd2ed855f ""
   "bib.bib" 1746813979 7199 573236548708e6ac28e4d578563dda7c ""
-  "out/main.aux" 1746813987 2447 ab478efac1f86dd16e85308c5ae04665 "pdflatex"
+  "out/main.aux" 1747221164 2548 ed763aa10d4257fd1b490d5d3f3e854e "pdflatex"
   (generated)
   "out/main.blg"
   "out/main.bbl"
-["pdflatex"] 1746813987 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1746813987
+["pdflatex"] 1747221163 "/Users/constantine/git/unboxed-types-2025/main.tex" "out/main.pdf" "main" 1747221189
   "/Users/constantine/git/unboxed-types-2025/main.tex" 1746805863 366 d51a82a922a9135f8b6abfff794e2309 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -149,15 +149,15 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1640808990 2724739 035c966baff75ba3e6ec6e4114eeb5c7 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "body.tex" 1746813985 11986 adc2eaf2a73372460e7374f182a6cd95 ""
+  "body.tex" 1747221189 12186 09c188517e43d62622287252498ed850 ""
   "easychair.cls" 1490561276 22243 f1c095d2b567c4f560c7cd435809e3d7 ""
   "main.tex" 1746805863 366 d51a82a922a9135f8b6abfff794e2309 ""
-  "out/main.aux" 1746813987 2447 ab478efac1f86dd16e85308c5ae04665 "pdflatex"
-  "out/main.bbl" 1746813987 2292 accf5052586d64e25abb512195e11afb "bibtex out/main"
-  "out/main.out" 1746813987 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "out/main.aux" 1747221164 2548 ed763aa10d4257fd1b490d5d3f3e854e "pdflatex"
+  "out/main.bbl" 1747221163 2292 accf5052586d64e25abb512195e11afb "bibtex out/main"
+  "out/main.out" 1747221164 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   "preamble.tex" 1746795272 577 1f53739f65ef71f5d2be2f367c272372 ""
   (generated)
-  "out/main.aux"
   "out/main.log"
-  "out/main.out"
   "out/main.pdf"
+  "out/main.aux"
+  "out/main.out"
